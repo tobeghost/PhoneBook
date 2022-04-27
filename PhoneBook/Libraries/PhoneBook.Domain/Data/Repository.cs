@@ -11,7 +11,7 @@ namespace PhoneBook.Domain.Data
     /// <summary>
     /// MongoDB repository
     /// </summary>
-    public partial class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         #region Fields
 
@@ -43,18 +43,9 @@ namespace PhoneBook.Domain.Data
 
         #region Ctor
 
-        public Repository(string connectionString)
+        public Repository(DatabaseConfig config)
         {
-            var client = new MongoClient(connectionString);
-            var databaseName = new MongoUrl(connectionString).DatabaseName;
-            _database = client.GetDatabase(databaseName);
-            _collection = _database.GetCollection<T>(typeof(T).Name);
-        }
-
-
-        public Repository(IMongoDatabase database)
-        {
-            _database = database;
+            _database = new MongoClient(config.ConnectionString).GetDatabase(config.DatabaseName);
             _collection = _database.GetCollection<T>(typeof(T).Name);
         }
 
@@ -184,6 +175,16 @@ namespace PhoneBook.Domain.Data
         public virtual void Delete(T entity)
         {
             _collection.FindOneAndDelete(e => e.Id == entity.Id);
+        }
+
+        /// <summary>
+        /// Delete entity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual async Task DeleteAsync(string id)
+        {
+            await _collection.DeleteOneAsync(e => e.Id == id);
         }
 
         /// <summary>

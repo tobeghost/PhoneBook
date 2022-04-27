@@ -11,7 +11,7 @@ namespace PhoneBook.Domain.Data
     /// <summary>
     /// Repository
     /// </summary>
-    public partial interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : BaseEntity
     {
 
         /// <summary>
@@ -97,6 +97,13 @@ namespace PhoneBook.Domain.Data
         /// </summary>
         /// <param name="entity">Entity</param>
         void Delete(T entity);
+
+        /// <summary>
+        /// Delete entity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task DeleteAsync(string id);
 
         /// Async Delete entity
         /// </summary>

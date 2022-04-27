@@ -10,7 +10,7 @@ namespace PhoneBook.Services.Users
     /// <summary>
     /// Contact service interface
     /// </summary>
-    public partial interface IContactService
+    public interface IContactService
     {
         /// <summary>
         /// Create new contact
@@ -27,11 +27,25 @@ namespace PhoneBook.Services.Users
         Task DeleteContact(Contact contact);
 
         /// <summary>
+        /// Delete contact by id
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <returns></returns>
+        Task DeleteContactById(string contactId);
+
+        /// <summary>
         /// Update contact
         /// </summary>
         /// <param name="contact"></param>
         /// <returns></returns>
         Task UpdateContact(Contact contact);
+
+        /// <summary>
+        /// Get contact by id
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <returns></returns>
+        Task<Contact> GetContactById(string contactId);
 
         /// <summary>
         /// Get all contact by user id

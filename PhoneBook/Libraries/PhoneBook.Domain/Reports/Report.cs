@@ -12,9 +12,14 @@ namespace PhoneBook.Domain.Reports
     public partial class Report : BaseEntity
     {
         /// <summary>
-        /// Gets or sets the user id
+        /// Gets or sets the report type
         /// </summary>
-        public string CreatedUserId { get; set; }
+        public ReportType Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the report title
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the request date

@@ -12,7 +12,7 @@ namespace PhoneBook.Services.Users
     /// <summary>
     /// Contact Service
     /// </summary>
-    public partial class ContactService : IContactService
+    public class ContactService : IContactService
     {
         private readonly IRepository<Contact> _contactRepository;
 
@@ -50,6 +50,20 @@ namespace PhoneBook.Services.Users
         }
 
         /// <summary>
+        /// Delete contact by id
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public virtual async Task DeleteContactById(string contactId)
+        {
+            if (contactId == null)
+                throw new ArgumentNullException("contactId");
+
+            await _contactRepository.DeleteAsync(contactId);
+        }
+
+        /// <summary>
         /// Update contact
         /// </summary>
         /// <param name="contact"></param>
@@ -61,6 +75,16 @@ namespace PhoneBook.Services.Users
                 throw new ArgumentNullException("contact");
 
             await _contactRepository.UpdateAsync(contact);
+        }
+
+        /// <summary>
+        /// Get contact by id
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <returns></returns>
+        public virtual async Task<Contact> GetContactById(string contactId)
+        {
+            return await _contactRepository.GetByIdAsync(contactId);
         }
 
         /// <summary>

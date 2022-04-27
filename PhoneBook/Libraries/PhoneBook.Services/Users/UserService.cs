@@ -12,7 +12,7 @@ namespace PhoneBook.Services.Users
     /// <summary>
     /// User Service
     /// </summary>
-    public partial class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
 
@@ -47,6 +47,20 @@ namespace PhoneBook.Services.Users
                 throw new ArgumentNullException("user");
 
             await _userRepository.DeleteAsync(user);
+        }
+
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public virtual async Task DeleteUserById(string userId)
+        {
+            if (userId == null)
+                throw new ArgumentNullException("userId");
+
+            await _userRepository.DeleteAsync(userId);
         }
 
         /// <summary>

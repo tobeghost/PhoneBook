@@ -10,7 +10,7 @@ namespace PhoneBook.Services.Users
     /// <summary>
     /// User service interface
     /// </summary>
-    public partial interface IUserService
+    public interface IUserService
     {
         /// <summary>
         /// Create new user
@@ -25,6 +25,13 @@ namespace PhoneBook.Services.Users
         /// <param name="user"></param>
         /// <returns></returns>
         Task DeleteUser(User user);
+
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task DeleteUserById(string userId);
 
         /// <summary>
         /// Update user
